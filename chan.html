@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Personal Information</title>
+<style>
+    body {
+        background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20201026/pngtree-d-illustration-mock-up-scene-geometry-shape-platform-forms-for-product-image_437729.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        align-items: center;
+        flex-direction: column;
+        display: flex;
+        font-family: Arial, sans-serif;
+    }
+    .one {
+        width: 150vh;
+    }
+</style>
+</head>
+<body>
+    <h1>Application Form</h1>
+    <form id="applicationForm" action="next_page.html" method="get" onsubmit="return validateForm()">
+        <fieldset class="one">
+            <center><legend><i>Basic Details</i></legend></center>
+            <br>
+            <label>
+                First name :
+            </label>
+            <input type="text" id="first_name" placeholder="Enter your first name" onkeydown="return /[a-zA-Z]/i.test(event.key)" required>
+            <br><br>
+            <label> 
+                Last name :
+            </label>
+            <input type="text" id="last_name" placeholder="Enter your last name" onkeydown="return /[a-zA-Z]/i.test(event.key)" required>
+            <br><br>
+            <label>
+                Gender :
+            </label>
+            <br>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+            <br>
+            <input type="radio" id="female" name="gender" value="female" required>
+            <label for="female">Female</label>
+            <br>
+            <input type="radio" id="other" name="gender" value="other" required>
+            <label for="other">Others</label>
+            <br><br>
+            <label>
+                Date Of Birth :
+            </label>
+            <input type="date" id="DOB" required>
+            <br><br>
+            <label>Choose Department: </label>
+            <select id="dept" name="dept" required>
+              <option value="">-select-</option>
+              <option value="cse">Computer Science Engineering</option>
+              <option value="mech">Mechanical Engineering</option>
+              <option value="ece">Electronics and Communication Engineering</option>
+              <option value="eee">Electrical and Electronics Engineering</option>
+              <option value="civil">Civil Engineering</option>
+            </select><br><br>
+            <label>Mail id :</label>
+            <input type="email" id="email" placeholder="nameinitial.22cse@kongu.edu" required>
+            <br><br>
+            <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="+91" required>            <br><br>
+            <label>
+                Age :
+            </label>
+            <input type="number" id="age" required>
+            <br><br>
+            <label >Address :  </label><br>
+            <textarea name="address" id="address" cols="30" rows="5" required></textarea>
+            <br><br>
+            <input type="checkbox" id="agree" required>
+            <label for="agree">I agree</label>
+            <br><br>
+            <center><input type="submit" value="Submit"></center>
+        </fieldset>
+    </form>
+
+    <script>
+        function validateForm() {
+            var firstName = document.getElementById("first_name").value;
+            if (!isNaN(firstName)) {
+                alert("First name cannot contain numbers");
+                return false;
+            }
+            var lastName = document.getElementById("last_name").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var dob = document.getElementById("DOB").value;
+            var dept = document.getElementById("dept").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var age = document.getElementById("age").value;
+            var address = document.getElementById("address").value;
+            if(!isNaN(lastName)) {
+                alert("Last name cannot contain numbers");
+                return false;
+            }
+            if(!gender) {
+                alert("Please select your gender");
+                return false;
+            }
+            if (!isValidEmail(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+            if (!isValidPhoneNumber(phone)) {
+                alert("Please enter a valid phone number");
+                return false;
+            }
+            if (isNaN(age) || parseInt(age) <= 0) {
+                alert("Please enter a valid age");
+                return false;
+            }
+            alert("Submitted successfully");
+            return true;
+        }
+        function isValidEmail(email) {
+            var emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        function isValidPhoneNumber(phone) {
+            var phoneRegex = /^\d{10}$/;
+            return phoneRegex.test(phone);
+        }
+    </script>
+</body>
+</html>
